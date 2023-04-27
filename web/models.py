@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Case, Value, When
 from django.contrib.auth import get_user_model
 
-
 # class User(models.Model):
 #     MALE = 'муж.'
 #     FEMALE = 'жен.'
@@ -20,6 +19,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Measurement(models.Model):
     date = models.DateTimeField()
     height = models.IntegerField()
@@ -34,9 +34,8 @@ class OrthostaticTest(models.Model):
     date = models.DateTimeField()
     first_heart_rate = models.IntegerField()
     second_heart_rate = models.IntegerField()
-    result = second_heart_rate - first_heart_rate
+    result = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
 
 
 class RuffierTest(models.Model):
@@ -44,5 +43,5 @@ class RuffierTest(models.Model):
     first_heart_rate = models.IntegerField()
     second_heart_rate = models.IntegerField()
     third_heart_rate = models.IntegerField()
-    result = ((first_heart_rate + second_heart_rate + third_heart_rate) * 4 - 200) /10
+    result = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
